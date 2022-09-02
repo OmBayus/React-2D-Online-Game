@@ -79,20 +79,18 @@ function App() {
     });
   }, []);
 
-  useEffect(() => {
-    if (keysPressed.w) {
-      socket.emit("move-up");
-    }
-    if (keysPressed.a) {
-      socket.emit("move-left");
-    }
-    if (keysPressed.s) {
-      socket.emit("move-down");
-    }
-    if (keysPressed.d) {
-      socket.emit("move-right");
-    }
-  }, [keysPressed]);
+  if (keysPressed.w) {
+    socket.emit("move-up");
+  }
+  if (keysPressed.a) {
+    socket.emit("move-left");
+  }
+  if (keysPressed.s) {
+    socket.emit("move-down");
+  }
+  if (keysPressed.d) {
+    socket.emit("move-right");
+  }
 
   useEffect(() => {
     document.addEventListener("keydown", (e) => {

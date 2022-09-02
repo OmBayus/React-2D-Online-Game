@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 });
 
 let game = new Game();
-let speed = 2;
+let speed = 0.1;
 
 io.on("connection", (socket) => {
   console.log("a user connected");
