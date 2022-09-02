@@ -3,7 +3,7 @@ const cors = require("cors");
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
-const io = require('socket.io')(server, {cors: {origin: "*"}});
+const io = require("socket.io")(server, { cors: { origin: "*" } });
 app.use(cors());
 
 const Game = require("./objects/Game");
@@ -13,14 +13,18 @@ app.get("/", (req, res) => {
 });
 
 let game = new Game();
-let speed = 5;
+let speed = 2;
 
 io.on("connection", (socket) => {
   console.log("a user connected");
   console.log(socket.id);
   // Join Game
-  game.addPlayer(socket.id);
-  io.sockets.emit("game", game);
+
+  socket.on("join", (data) => {
+    game.addPlayer(socket.id, data.name, data.color);
+    socket.emit("join",game)
+    io.sockets.emit("game", game);
+  });
 
   socket.on("move-right", () => {
     game.movePlayer(socket.id, speed, 0);
@@ -33,12 +37,12 @@ io.on("connection", (socket) => {
   });
 
   socket.on("move-up", () => {
-    game.movePlayer(socket.id, 0, speed);
+    game.movePlayer(socket.id, 0, -speed);
     io.sockets.emit("game", game);
   });
 
   socket.on("move-down", () => {
-    game.movePlayer(socket.id, 0, -speed);
+    game.movePlayer(socket.id, 0, speed);
     io.sockets.emit("game", game);
   });
   // Leave Game
