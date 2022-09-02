@@ -34,8 +34,6 @@ function test() {
 
 io.on("connection", (socket) => {
 
-  io.sockets.emit("game", null);
-
   socket.on("join", (data) => {
     game.addPlayer(socket.id, data.name, data.color);
     socket.emit("join",game)
@@ -52,7 +50,6 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     game.removePlayer(socket.id);
     io.sockets.emit("game", game);
-    console.log("user disconnected");
   });
 });
 

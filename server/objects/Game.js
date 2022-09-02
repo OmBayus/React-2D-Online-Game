@@ -8,8 +8,8 @@ module.exports = class Game {
   addPlayer(id, name, color) {
     let isExist = this.players.find((player) => player.id === id);
     if(isExist) return
-    const x = 50 + Math.floor(Math.random() * 1000);
-    const y = 50 + Math.floor(Math.random() * 500);
+    const x = 50 + Math.floor(Math.random() * 400);
+    const y = 50 + Math.floor(Math.random() * 400);
     const player = new Player(id, name, color, x, y);
     this.players.push(player);
   }
