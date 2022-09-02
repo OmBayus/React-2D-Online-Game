@@ -15,10 +15,26 @@ app.get("/", (req, res) => {
 let game = new Game();
 let speed = 0.1;
 
+function test() {
+  const players = game.players;
+  if(players.length === 2){
+    const player1 = players[0];
+    const player2 = players[1];
+    
+    const distanceX = player1.x - player2.x;
+    const distanceY = player1.y - player2.y;
+    const deleteDistance = 30
+    if(distanceX < deleteDistance && distanceX > -deleteDistance && distanceY < deleteDistance && distanceY > -deleteDistance){
+      game.removePlayer(player1.id);
+      game.removePlayer(player2.id);
+    }
+  }
+}
+  
+
 io.on("connection", (socket) => {
-  console.log("a user connected");
-  console.log(socket.id);
-  // Join Game
+
+  io.sockets.emit("game", null);
 
   socket.on("join", (data) => {
     game.addPlayer(socket.id, data.name, data.color);
@@ -26,25 +42,12 @@ io.on("connection", (socket) => {
     io.sockets.emit("game", game);
   });
 
-  socket.on("move-right", () => {
-    game.movePlayer(socket.id, speed, 0);
+  socket.on("move", (data) => {
+    game.movePlayer(socket.id, data.x*speed, data.y*speed);
+    test()
     io.sockets.emit("game", game);
   });
 
-  socket.on("move-left", () => {
-    game.movePlayer(socket.id, -speed, 0);
-    io.sockets.emit("game", game);
-  });
-
-  socket.on("move-up", () => {
-    game.movePlayer(socket.id, 0, -speed);
-    io.sockets.emit("game", game);
-  });
-
-  socket.on("move-down", () => {
-    game.movePlayer(socket.id, 0, speed);
-    io.sockets.emit("game", game);
-  });
   // Leave Game
   socket.on("disconnect", () => {
     game.removePlayer(socket.id);

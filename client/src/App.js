@@ -80,16 +80,16 @@ function App() {
   }, []);
 
   if (keysPressed.w) {
-    socket.emit("move-up");
+    socket.emit("move",{x:0,y:-1});
   }
   if (keysPressed.a) {
-    socket.emit("move-left");
+    socket.emit("move",{x:-1,y:0});
   }
   if (keysPressed.s) {
-    socket.emit("move-down");
+    socket.emit("move",{x:0,y:1});
   }
   if (keysPressed.d) {
-    socket.emit("move-right");
+    socket.emit("move",{x:1,y:0});
   }
 
   useEffect(() => {
