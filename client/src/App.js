@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 
-const ENDPOINT = "localhost:4000";
+const ENDPOINT = "https://react-online-game-2d.herokuapp.com";
 
 const socket = io(ENDPOINT);
 
