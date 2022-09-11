@@ -3,7 +3,7 @@
 
 ## Preview
 
-<img src="https://drive.google.com/uc?export=view&id=1I_meyNJkouQb3Oud0pR9A0sFlXsuzADk"/>
+<img width="500px" src="https://drive.google.com/uc?export=view&id=1I_meyNJkouQb3Oud0pR9A0sFlXsuzADk"/>
 
 ### License & copyright
 
