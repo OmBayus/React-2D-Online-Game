@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 });
 
 let game = new Game();
-let speed = 0.1;
+let speed = 0.5;
 
 // function test() {
 //   const players = game.players;
