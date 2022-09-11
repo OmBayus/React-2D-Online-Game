@@ -2885,11 +2885,6 @@ function generateName() {
   return name;
 }
 
-// socket.emit("auth",token)
-
-// socket.on("auth",(info)=>{
-//     console.log(info)
-// })
 function Lobby({ setJoined, setGame }) {
   const [player, setPlayer] = useState({
     name: generateName(),
@@ -2904,6 +2899,7 @@ function Lobby({ setJoined, setGame }) {
       setJoined(true);
       setGame(data);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = (e) => {
@@ -2970,6 +2966,7 @@ function App() {
       canvas.current.height = window.innerHeight;
       setCtx(canvas.current.getContext("2d"));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [game]);
 
   // Load Game
@@ -3006,6 +3003,7 @@ function App() {
     if (ctx) {
       LoadGame();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [game]);
 
   var background = new Image();

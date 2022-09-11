@@ -15,21 +15,21 @@ app.get("/", (req, res) => {
 let game = new Game();
 let speed = 0.1;
 
-function test() {
-  const players = game.players;
-  if(players.length === 2){
-    const player1 = players[0];
-    const player2 = players[1];
+// function test() {
+//   const players = game.players;
+//   if(players.length >= 2){
+//     const player1 = players[0];
+//     const player2 = players[1];
     
-    const distanceX = player1.x - player2.x;
-    const distanceY = player1.y - player2.y;
-    const deleteDistance = 30
-    if(distanceX < deleteDistance && distanceX > -deleteDistance && distanceY < deleteDistance && distanceY > -deleteDistance){
-      game.removePlayer(player1.id);
-      game.removePlayer(player2.id);
-    }
-  }
-}
+//     const distanceX = player1.x - player2.x;
+//     const distanceY = player1.y - player2.y;
+//     const deleteDistance = 30
+//     if(distanceX < deleteDistance && distanceX > -deleteDistance && distanceY < deleteDistance && distanceY > -deleteDistance){
+//       // game.removePlayer(player1.id);
+//       game.removePlayer(player2.id);
+//     }
+//   }
+// }
   
 
 io.on("connection", (socket) => {
@@ -42,7 +42,7 @@ io.on("connection", (socket) => {
 
   socket.on("move", (data) => {
     game.movePlayer(socket.id, data.x*speed, data.y*speed);
-    test()
+    // test()
     io.sockets.emit("game", game);
   });
 
