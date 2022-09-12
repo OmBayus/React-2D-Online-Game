@@ -5,13 +5,25 @@ module.exports = class Player {
     this.color = color;
     this.x = x;
     this.y = y;
+    this.mvx = 0;
+    this.mvy = 0;
   }
   move(x, y) {
-    let newX = this.x + x;
-    let newY = this.y + y;
-    if(newX <75 || newX > 500)return
-    if(newY < 75 || newY > 500) return
+    if (typeof x === "number") {
+      this.mvx = x;
+    }
+    if (typeof y === "number") {
+      this.mvy = y;
+    }
+  }
+  update() {
+    let newX = this.x + this.mvx;
+    let newY = this.y + this.mvy;
+    if (newX < 75 || newX > 500) return;
+    if (newY < 75 || newY > 500) return;
     this.x = newX;
     this.y = newY;
+    // this.x += this.mvx;
+    // this.y += this.mvy;
   }
 };

@@ -26,4 +26,9 @@ module.exports = class Game {
       }
     });
   }
+  update() {
+    this.players.forEach((p) => {
+      p.update();
+    });
+  }
 };

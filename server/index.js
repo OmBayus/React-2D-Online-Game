@@ -15,7 +15,6 @@ app.get("/", (req, res) => {
 });
 
 let game = new Game();
-let speed = 1;
 
 // function test() {
 //   const players = game.players;
@@ -32,9 +31,15 @@ let speed = 1;
 //     }
 //   }
 // }
-  
-
+let interval
 io.on("connection", (socket) => {
+
+  if(!interval && io.sockets.sockets.size === 1){
+    interval = setInterval(()=>{
+      game.update();
+      io.sockets.emit("game", game);
+    },10)
+  }
 
   socket.on("join", (data) => {
     game.addPlayer(socket.id, data.name, data.color);
@@ -43,17 +48,23 @@ io.on("connection", (socket) => {
   });
 
   socket.on("move", (data) => {
-    game.movePlayer(socket.id, data.x*speed, data.y*speed);
+    game.movePlayer(socket.id, data.x,data.y);
     // test()
-    io.sockets.emit("game", game);
+    // io.sockets.emit("game", game);
   });
 
   // Leave Game
   socket.on("disconnect", () => {
     game.removePlayer(socket.id);
     io.sockets.emit("game", game);
+    if(io.sockets.sockets.size === 0 && interval){
+      clearInterval(interval)
+      interval = null
+    }
   });
 });
+
+
 
 const PORT = process.env.PORT || 80;
 
