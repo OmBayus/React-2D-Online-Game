@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import generateName from "./utils/generateName";
 import getRandomColor from "./utils/getRandomColor";
 
-const ENDPOINT = "http://localhost/";
+const ENDPOINT = "/";
 
 const socket = io(ENDPOINT);
 
