@@ -1,5 +1,5 @@
 # React 2D Online Game
-### https://react-2d-online-game.netlify.app/
+### https://react-online-game-2d.herokuapp.com/
 
 ## Preview
 
