@@ -4,7 +4,9 @@ EXPOSE 80
 
 WORKDIR /usr/src/app
 
-COPY ./server/ .
-RUN npm install
+COPY . .
+RUN CD client && npm install && npm run build
+RUN mv build ../server
+RUN CD server && npm install
 
 ENTRYPOINT ["npm", "start"]

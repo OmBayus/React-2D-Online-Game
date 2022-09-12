@@ -6,6 +6,8 @@ const server = http.createServer(app);
 const io = require("socket.io")(server, { cors: { origin: "*" } });
 app.use(cors());
 
+app.use(express.static('build'))
+
 const Game = require("./objects/Game");
 
 app.get("/", (req, res) => {
