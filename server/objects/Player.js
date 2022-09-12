@@ -17,8 +17,8 @@ module.exports = class Player {
     }
   }
   update() {
-    let newX = this.x + this.mvx;
-    let newY = this.y + this.mvy;
+    let newX = this.x + this.mvx*5;
+    let newY = this.y + this.mvy*5;
     if (newX < 75 || newX > 500) return;
     if (newY < 75 || newY > 500) return;
     this.x = newX;
