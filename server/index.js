@@ -38,7 +38,7 @@ io.on("connection", (socket) => {
     interval = setInterval(()=>{
       game.update();
       io.sockets.emit("game", game);
-    },60)
+    },20)
   }
 
   socket.on("join", (data) => {
