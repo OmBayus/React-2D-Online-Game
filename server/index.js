@@ -32,6 +32,7 @@ let game = new Game();
 //   }
 // }
 let interval
+let interval2
 io.on("connection", (socket) => {
 
   if(!interval && io.sockets.sockets.size === 1){
@@ -39,6 +40,13 @@ io.on("connection", (socket) => {
       game.update();
       io.sockets.emit("game", game);
     },20)
+  }
+
+  if(!interval2 && io.sockets.sockets.size === 1){
+    interval2 = setInterval(()=>{
+      game.addGem();
+      io.sockets.emit("game", game);
+    },2000)
   }
 
   socket.on("join", (data) => {
@@ -60,6 +68,11 @@ io.on("connection", (socket) => {
     if(io.sockets.sockets.size === 0 && interval){
       clearInterval(interval)
       interval = null
+    }
+    if(io.sockets.sockets.size === 0 && interval2){
+      clearInterval(interval2)
+      interval2 = null
+      game.gems = []
     }
   });
 });

@@ -7,6 +7,7 @@ module.exports = class Player {
     this.y = y;
     this.mvx = 0;
     this.mvy = 0;
+    this.score = 0;
   }
   move(x, y) {
     if (typeof x === "number") {

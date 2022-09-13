@@ -215,6 +215,18 @@ function App() {
           stroke="black"
           strokeWidth="2px"
         />
+        {game && game.gems && game.gems.map((gem) => (
+          <rect
+          width="10px"
+          height="10px"
+          fill="yellow"
+          stroke="white"
+          strokeWidth="2px"
+          x={gem.x}
+          y={gem.y}
+        />
+        ))
+        }
         {game &&
           game.players.map((player) => {
             return (
@@ -235,7 +247,7 @@ function App() {
                   strokeWidth="2px"
                   dy=".3em"
                 >
-                  {player.name}
+                  {player.name} : {player.score}
                 </text>
               </g>
             );
